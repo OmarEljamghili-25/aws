@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+echo "----liste object ----"
+
+# Vérifier si la variable est vide ou non définie
+if [ -z "$1" ]; then
+    echo "Il faut spécifier un nom de bucket."
+    exit 1  # Arrêter le script et retourner un code de sortie 1 (indiquant une erreur)
+else
+    echo "Nom du bucket : $1"
+fi
+
+BUCKET_NAME=$1
+
+# Créer le bucket avec la contrainte de région
+aws s3api list-objects-v2 --bucket "$BUCKET_NAME" 
+

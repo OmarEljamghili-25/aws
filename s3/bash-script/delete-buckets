@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+echo "----delete buckets----"
+
+# Vérifier si la variable est vide ou non définie
+if [ -z "$1" ]; then
+    echo "Il faut spécifier un nom de bucket."
+    exit 1  # Arrêter le script et retourner un code de sortie 1 (indiquant une erreur)
+else
+    echo "Nom du bucket : $1"
+fi
+
+BUCKET_NAME=$1
+REGION="eu-west-3"
+aws s3 rm s3://"$BUCKET_NAME" --recursive
+
+# Créer le bucket avec la contrainte de région
+aws s3api delete-bucket --bucket "$BUCKET_NAME" --region "$REGION"

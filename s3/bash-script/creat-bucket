@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+echo "----create buckets----"
+
+# Vérifier si la variable est vide ou non définie
+if [ -z "$1" ]; then
+    echo "Il faut spécifier un nom de bucket."
+    exit 1  # Arrêter le script et retourner un code de sortie 1 (indiquant une erreur)
+else
+    echo "Nom du bucket : $1"
+fi
+
+BUCKET_NAME=$1
+
+# Créer le bucket avec la contrainte de région
+aws s3api create-bucket  \ 
+--bucket "$BUCKET_NAME" \
+--region eu-west-3 \
+--create-bucket-configuration LocationConstraint=eu-west-3
